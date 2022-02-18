@@ -16,7 +16,18 @@ if (navigator.serviceWorker) {
         alert("Service worker registration error.");
     }
 } else {
-    alert("Service workers are not supported.");
+    if (location.protocol === "http:") {
+        const changeHttps = confirm(
+            "Service workers are not supported. Using HTTP connection might be the reason.\nWould you like to change to HTTPS connection?"
+        );
+        if (changeHttps) {
+            const url = new URL(location.href);
+            url.protocol = "https:";
+            location.replace(url.toString());
+        }
+    } else {
+        alert("Service workers are not supported.");
+    }
 }
 
 document.getElementsByName("send")[0].addEventListener("click", async () => {
