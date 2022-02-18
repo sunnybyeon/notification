@@ -1,3 +1,14 @@
+// get baseURL (path to index.html)
+const baseURL = (() => {
+    if (location.pathname.slice(-10) === "index.html") {
+        return location.pathname.slice(0, -11);
+    } else if (location.pathname.slice(-1) === "/") {
+        return location.pathname.slice(0, -1);
+    } else {
+        return location.pathname;
+    }
+})();
+
 async function requestNotificationPermission() {
     if (window.Notification && Notification.permission !== "granted") {
         await Notification.requestPermission();
@@ -11,7 +22,7 @@ requestNotificationPermission();
 
 if (navigator.serviceWorker) {
     try {
-        navigator.serviceWorker.register("/sw.js");
+        navigator.serviceWorker.register(`${baseURL}/sw.js`);
     } catch (err) {
         alert("Service worker registration error.");
     }
