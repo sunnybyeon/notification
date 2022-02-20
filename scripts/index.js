@@ -96,10 +96,8 @@ document.getElementsByName("send")[0].addEventListener("click", async () => {
             if (iconSearchDiv.getElementsByTagName("i")[0]) {
                 const icon = iconSearchDiv.getElementsByTagName("i")[0];
                 const iconName = icon.classList[0].substring(3);
-                options.icon = `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/${iconName}.svg`;
+                options.icon = `https://cdn.jsdelivr.net/gh/sunnybyeon/bootstrap-icons-png@v1.8.1/256px/${iconName}.png`;
             }
-
-            console.log(options);
 
             registration.showNotification(titleTag.value, options);
         } else if (Notification.permission === "denied") {
