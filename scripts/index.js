@@ -39,15 +39,13 @@ function hideIconList() {
 function addIconToIconList(iconName) {
     const icon = document.createElement("i");
     icon.classList.add(`bi-${iconName}`);
-    icon.addEventListener("click", () => {
+    icon.addEventListener("click", (ev) => {
+        const selectedElem = ev.target;
         iconSearchDiv.replaceChildren();
-        const insertedIcon = iconSearchDiv.insertAdjacentElement(
-            "beforeend",
-            icon
+        iconSearchDiv.insertAdjacentHTML(
+            "afterbegin",
+            `<i class="${selectedElem.classList[0]}" contenteditable="false"></i>`
         );
-        // div 안 커서(caret)이 아이콘 뒤에 보이게 하기 위하여
-        const nbsp = document.createTextNode("\u00A0");
-        insertedIcon.appendChild(nbsp);
         hideIconList();
     });
     iconList.insertAdjacentElement("beforeend", icon);
@@ -133,5 +131,17 @@ iconSearchDiv.addEventListener("input", () => {
                 addIconToIconList(icon.name);
             }
         }
+    }
+});
+iconSearchDiv.addEventListener("focus", () => {
+    if (iconSearchDiv.getElementsByTagName("i").length === 1) {
+        iconSearchDiv.getElementsByTagName("i")[0].remove();
+
+        iconList.replaceChildren();
+        for (const icon of icons) {
+            addIconToIconList(icon.name);
+        }
+        showIconList();
+        iconList.scroll(0, 0);
     }
 });
