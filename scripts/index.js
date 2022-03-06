@@ -12,6 +12,8 @@ const baseURL = (() => {
     }
 })();
 
+const params = new URLSearchParams(location.search);
+
 async function requestNotificationPermission() {
     if (window.Notification && Notification.permission !== "granted") {
         await Notification.requestPermission();
@@ -77,6 +79,23 @@ if (navigator.serviceWorker) {
 
 for (const icon of icons) {
     addIconToIconList(icon.name);
+}
+
+if (params.get("title")) {
+    document.getElementsByName("title")[0].value = decodeURI(
+        params.get("title")
+    );
+}
+if (params.get("body")) {
+    document.getElementsByName("body")[0].value = decodeURI(params.get("body"));
+}
+if (params.get("icon")) {
+    iconSearchDiv.insertAdjacentHTML(
+        "afterbegin",
+        `<i class="bi-${decodeURI(
+            params.get("icon")
+        )}" contenteditable="false"></i>`
+    );
 }
 
 document.getElementsByName("send")[0].addEventListener("click", async () => {
