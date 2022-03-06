@@ -95,6 +95,7 @@ document.getElementsByName("send")[0].addEventListener("click", async () => {
                 const icon = iconSearchDiv.getElementsByTagName("i")[0];
                 const iconName = icon.classList[0].substring(3);
                 options.icon = `https://cdn.jsdelivr.net/gh/sunnybyeon/bootstrap-icons-png@v1.8.1/256px/${iconName}.png`;
+                options.badge = `https://cdn.jsdelivr.net/gh/sunnybyeon/bootstrap-icons-png@v1.8.1/256px/${iconName}.png`;
             }
 
             registration.showNotification(titleTag.value, options);
