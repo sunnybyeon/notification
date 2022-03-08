@@ -2,15 +2,12 @@ import { icons } from "./bootstrap-icons/icons.js";
 import { searchIcon } from "./bootstrap-icons/search.js";
 
 // get baseURL (path to index.html)
-const baseURL = (() => {
-    if (location.pathname.slice(-10) === "index.html") {
-        return location.pathname.slice(0, -11);
-    } else if (location.pathname.slice(-1) === "/") {
-        return location.pathname.slice(0, -1);
-    } else {
-        return location.pathname;
-    }
-})();
+const baseURL =
+    location.pathname.slice(-10) === "index.html"
+        ? location.pathname.slice(0, -11)
+        : location.pathname.slice(-1) === "/"
+        ? location.pathname.slice(0, -1)
+        : location.pathname;
 
 const params = new URLSearchParams(location.search);
 
@@ -82,19 +79,15 @@ for (const icon of icons) {
 }
 
 if (params.get("title")) {
-    document.getElementsByName("title")[0].value = decodeURI(
-        params.get("title")
-    );
+    document.getElementsByName("title")[0].value = params.get("title");
 }
 if (params.get("body")) {
-    document.getElementsByName("body")[0].value = decodeURI(params.get("body"));
+    document.getElementsByName("body")[0].value = params.get("body");
 }
 if (params.get("icon")) {
     iconSearchDiv.insertAdjacentHTML(
         "afterbegin",
-        `<i class="bi-${decodeURI(
-            params.get("icon")
-        )}" contenteditable="false"></i>`
+        `<i class="bi-${params.get("icon")}" contenteditable="false"></i>`
     );
 }
 
