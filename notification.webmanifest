@@ -4,17 +4,17 @@
     "description": "A simple web app that allows the user to display their own notifications.",
     "icons": [
         {
-            "src": "/icons/icon-vector.svg",
+            "src": "/icons/icon-dark-vector.svg",
             "type": "image/svg+xml",
             "sizes": "512x512"
         },
         {
-            "src": "/icons/icon-512.png",
+            "src": "/icons/icon-dark-512.png",
             "type": "image/png",
             "sizes": "512x512"
         },
         {
-            "src": "/icons/icon-192.png",
+            "src": "/icons/icon-dark-192.png",
             "type": "image/png",
             "sizes": "192x192"
         }

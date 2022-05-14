@@ -5,7 +5,7 @@ const baseUrl =
         ? pathname.slice(0, pathname.length - 1)
         : pathname;
 
-const cacheName = "notification-v1.0.0--bootstrap-icons-1.8.1";
+const cacheName = "notification-v1.0.0--bootstrap-icons-v1.8.1";
 
 self.addEventListener("install", (ev) => {
     const cacheFiles = [
@@ -16,7 +16,9 @@ self.addEventListener("install", (ev) => {
         "/scripts/bootstrap-icons/search.js",
         "/styles/index.css",
         "/favicon.ico",
-        "/icons/icon-512.png",
+        "/icons/favicon-vector.svg",
+        "/icons/favicon-512.png",
+        "/icons/favicon-192.png",
     ];
     cacheFiles.forEach((file, index, array) => {
         array[index] = baseUrl + file;
