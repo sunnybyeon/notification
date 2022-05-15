@@ -1,28 +1,18 @@
-const swScopeUrl = new URL(self.registration.scope);
-const pathname = swScopeUrl.pathname;
-const baseUrl =
-    pathname.slice(pathname.length - 1) === "/"
-        ? pathname.slice(0, pathname.length - 1)
-        : pathname;
-
 const cacheName = "notification-v1.0.0--bootstrap-icons-v1.8.1";
 
 self.addEventListener("install", (ev) => {
     const cacheFiles = [
-        "/",
-        "/index.html",
-        "/scripts/index.js",
-        "/scripts/bootstrap-icons/icons.js",
-        "/scripts/bootstrap-icons/search.js",
-        "/styles/index.css",
-        "/favicon.ico",
-        "/icons/favicon-vector.svg",
-        "/icons/favicon-512.png",
-        "/icons/favicon-192.png",
+        "./",
+        "./index.html",
+        "./scripts/index.js",
+        "./scripts/bootstrap-icons/icons.js",
+        "./scripts/bootstrap-icons/search.js",
+        "./styles/index.css",
+        "./favicon.ico",
+        "./icons/favicon-vector.svg",
+        "./icons/favicon-512.png",
+        "./icons/favicon-192.png",
     ];
-    cacheFiles.forEach((file, index, array) => {
-        array[index] = baseUrl + file;
-    });
     ev.waitUntil(
         (async () => {
             const cache = await caches.open(cacheName);
@@ -60,7 +50,7 @@ self.addEventListener("activate", (ev) => {
 
 self.addEventListener("notificationclick", (ev) => {
     ev.notification.close();
-    let editUrl = `${baseUrl}/?title=${encodeURI(
+    let editUrl = `./?title=${encodeURI(
         ev.notification.title
     )}&body=${encodeURI(ev.notification.body)}`;
     if (ev.notification.icon) {
