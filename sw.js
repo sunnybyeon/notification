@@ -1,4 +1,4 @@
-const cacheName = "notification-v1.0.0--bootstrap-icons-v1.8.1";
+const cacheName = "notification-v1.0.1--bootstrap-icons-v1.8.1";
 
 self.addEventListener("install", (ev) => {
     const cacheFiles = [
@@ -50,13 +50,13 @@ self.addEventListener("activate", (ev) => {
 
 self.addEventListener("notificationclick", (ev) => {
     ev.notification.close();
-    let editUrl = `./?title=${encodeURI(
+    let editUrl = `./?title=${encodeURIComponent(
         ev.notification.title
-    )}&body=${encodeURI(ev.notification.body)}`;
+    )}&body=${encodeURIComponent(ev.notification.body)}`;
     if (ev.notification.icon) {
         const iconURL = ev.notification.icon;
         const iconName = iconURL.split("/").pop().slice(0, -4);
-        editUrl += `&icon=${encodeURI(iconName)}`;
+        editUrl += `&icon=${encodeURIComponent(iconName)}`;
     }
     self.clients.openWindow(editUrl);
 });
