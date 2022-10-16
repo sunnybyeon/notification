@@ -18,7 +18,32 @@
     <body>
         <main>
             <section class="input-wrapper">
-                <input type="text" name="title" placeholder="Title" />
+                <section class="title-history-input-wrapper">
+                    <button name="show-history">
+                        <i
+                            class="bi-clock-history"
+                            aria-label="Show History"
+                        ></i>
+                    </button>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Title"
+                    />
+                </section>
+                <section class="history-list-wrapper" style="display: none">
+                    <label>
+                        Days to save history for:
+                        <input
+                            type="number"
+                            name="history-save-days"
+                            min="1"
+                            max="365"
+                        />
+                    </label>
+                    <ol class="history-list"></ol>
+                </section>
                 <textarea
                     name="body"
                     placeholder="Body [Optional]"

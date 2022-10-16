@@ -1,4 +1,4 @@
-const cacheName = "notification-v1.0.1--bootstrap-icons-v1.8.1";
+const cacheName = "notification-v1.1.0--bootstrap-icons-v1.8.1";
 
 self.addEventListener("install", (ev) => {
     const cacheFiles = [
