@@ -41,15 +41,18 @@ section.history-list-wrapper {
 }
 label {
     font-size: max(1.3vw, 1rem);
+    display: block;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed hsl(0, 0%, 40%);
 }
 input[name="history-save-days"] {
-    width: 5ch;
+    width: 7ex;
     text-align: center;
     font-size: max(1.2vw, 0.9rem);
-    padding: 0 0 2px 0;
-    margin-left: 0.2rem;
-    border-width: 0;
-    border-bottom: 2px solid hsl(0, 0%, 65%);
+    font-weight: 500;
+    padding: 0;
+    margin-bottom: 0.1rem;
+    border: none;
     border-radius: 0;
 }
 ol.history-list {
@@ -66,8 +69,12 @@ div.history-item-wrapper {
 ol.history-list > li + li {
     border-top: 1px solid hsl(0, 0%, 50%);
 }
+div.history-item-top-wrapper {
+    margin-bottom: 2px;
+}
 span.history-title {
     font-size: max(1.3vw, 1rem);
+    font-weight: bold;
 }
 i.history-icon {
     padding-right: 0.2rem;

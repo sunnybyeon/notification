@@ -2,6 +2,7 @@ import { icons } from "./bootstrap-icons/icons.js";
 import { searchIcon } from "./bootstrap-icons/search.js";
 
 const MILLISECONDS_IN_A_DAY = 86400000;
+const TIMEZONE_OFFSET_IN_MILLISECONDS = new Date().getTimezoneOffset() * 60000;
 
 // get baseURL (path to index.html)
 const baseURL =
@@ -31,49 +32,33 @@ const historySection = document.getElementsByClassName(
 )[0];
 const historyList = document.getElementsByClassName("history-list")[0];
 
-function addHistoryToHistoryList(history) {
-    const dateString = new Date(history.date).toISOString().split("T")[0];
+function addHistoryToHistoryList({ title, body, date, icon }) {
+    const bodyHTML = body ? body.replace(/\n/g, "<br>") : null;
+    const dateString = new Date(date - TIMEZONE_OFFSET_IN_MILLISECONDS)
+        .toISOString()
+        .split("T")[0];
     const historyItem = document.createElement("li");
     historyItem.insertAdjacentHTML(
         "afterbegin",
         `<div class="history-item-wrapper">
             <div class="history-item-top-wrapper">
-                ${
-                    history.icon
-                        ? `<i class="bi-${history.icon} history-icon"></i>`
-                        : ``
-                }
-                <span class="history-title">${history.title}</span>
+                ${icon ? `<i class="bi-${icon} history-icon"></i>` : ``}
+                <span class="history-title">${title}</span>
                 <span class="history-date">${dateString}</span>
             </div>
-            ${
-                history.body
-                    ? `<div class="history-body">${history.body}</div>`
-                    : ``
-            }
+            ${body ? `<div class="history-body">${bodyHTML}</div>` : ``}
         </div>`
     );
-    historyItem.addEventListener("click", (ev) => {
-        const wrapper = ev.currentTarget.getElementsByClassName(
-            "history-item-wrapper"
-        )[0];
-        const topWrapper = wrapper.getElementsByClassName(
-            "history-item-top-wrapper"
-        )[0];
-        titleTag.value =
-            topWrapper.getElementsByClassName("history-title")[0].textContent;
-        if (wrapper.getElementsByClassName("history-body").length > 0) {
-            bodyTag.value =
-                wrapper.getElementsByClassName("history-body")[0].textContent;
+    historyItem.addEventListener("click", () => {
+        titleTag.value = title;
+        if (body) {
+            bodyTag.value = body;
         }
-        if (topWrapper.getElementsByClassName("history-icon").length > 0) {
+        if (icon) {
             iconSearchDiv.replaceChildren();
             iconSearchDiv.insertAdjacentHTML(
                 "afterbegin",
-                `<i class="${
-                    topWrapper.getElementsByClassName("history-icon")[0]
-                        .classList[0]
-                }" contenteditable="false"></i>`
+                `<i class="bi-${icon}" contenteditable="false"></i>`
             );
         }
         historySection.style.display = "none";
