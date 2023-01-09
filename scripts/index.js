@@ -2,7 +2,6 @@ import { icons } from "./bootstrap-icons/icons.js";
 import { searchIcon } from "./bootstrap-icons/search.js";
 
 const MILLISECONDS_IN_A_DAY = 86400000;
-const TIMEZONE_OFFSET_IN_MILLISECONDS = new Date().getTimezoneOffset() * 60000;
 
 // get baseURL (path to index.html)
 const baseURL =
@@ -34,9 +33,7 @@ const historyList = document.getElementsByClassName("history-list")[0];
 
 function addHistoryToHistoryList({ title, body, date, icon }) {
     const bodyHTML = body ? body.replace(/\n/g, "<br>") : null;
-    const dateString = new Date(date - TIMEZONE_OFFSET_IN_MILLISECONDS)
-        .toISOString()
-        .split("T")[0];
+    const dateString = new Date(date).toLocaleDateString(navigator.languages);
     const historyItem = document.createElement("li");
     historyItem.insertAdjacentHTML(
         "afterbegin",
